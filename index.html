@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>YouTube player</title>
+<script type="text/javascript">
+	function onYouTubePlayerReady(playerId) {
+		ytplayer = document.getElementById("ytplayer");
+		ytplayer.togglePlayback = togglePlaybackFunc;
+		ytplayer.setPlaybackQuality(document.getElementById("quality").value)
+		ytplayer.setVolume(document.getElementById("volume").value)
+	}
+</script>
+</head>
+<body>
+
+<div id="movie"></div>
+<script type="text/javascript">
+	moviediv = document.getElementById( "movie" )
+	videoID = ""
+	function setVid( videoIDParam )
+	{
+		videoID = videoIDParam
+		moviediv.innerHTML = 
+		'<embed src="http://www.youtube.com/apiplayer?video_id='+videoID+'&version=3&enablejsapi=1&rel=0&modestbranding=1&showinfo=0&autohide=0&autoplay=1"\
+			type="application/x-shockwave-flash"\
+			id="ytplayer"\
+			width="300" height="200"\
+			allowscriptaccess="always"\
+			allowfullscreen="true"\
+		/>';
+	}
+	function togglePlaybackFunc()
+	{
+		if (this.getPlayerState() == 1) //Playing
+		{
+			this.pauseVideo()
+		}
+		else
+		{
+			this.playVideo()
+		}
+	}
+	setVid( "33YcYLumEDk" )
+</script>
+<form action="javascript:ytplayer.togglePlayback()">
+	<input type="submit" value="Play/Pause"/>
+</form>
+<form action="javascript:setVid(this.videoid.value)">
+	Video ID: <input type="text" id="videoid" size=10/><input type="submit" value="Set"/>
+</form>
+<script "text/javascript">document.getElementById("videoid").value=videoID</script>
+<form action="javascript:ytplayer.seekTo(this.seek.value)">
+	Seek to: <input type="text" id="seek" size=10/><input type="submit" value="Seek"/>
+</form>
+<input type="range" id="volumeslider" min="0" max="100" value="50" onchange="javascript:ytplayer.setVolume(this.value);document.getElementById('volume').value=this.value"/>
+<form action="javascript:ytplayer.setVolume(this.volume.value);document.getElementById('volumeslider').value=this.volume.value">
+	Set volume: <input type="text" id="volume" value="50" size=10/><input type="submit" value="Set"/>
+</form>
+Set playback quality:
+<select id="quality" onchange="javascript:ytplayer.setPlaybackQuality(this.value)">
+	<option value="small">Small</option>
+	<option value="medium">Medium</option>
+	<option value="large">Large</option>
+	<option value="hd720">HD720</option>
+	<option value="hd1080">HD1080</option>
+	<option value="highres">High resolution</option>
+	<option value="default" selected=1>Default</option>
+</select>
+<form action="javascript:this.qualitybutton.value='Playback quality: '+ytplayer.getPlaybackQuality()">
+	<input type="submit" id="qualitybutton" value="Playback quality"/>
+</form>
+
+</body>
+</html>
+
+
+<!--
+<embed
+	type="application/x-shockwave-flash"
+	src="player.swf?autoplay=0&mp3=music/Beaking Benjamin/Breaking Benjamin - Give Me a Sign.mp3"
+	width="400" height="27"
+	allowscriptaccess="never"
+	quality="best"
+	bgcolor="#ffffff"
+	wmode="window"
+	flashvars="playerMode=embedded"
+/>
+-->
