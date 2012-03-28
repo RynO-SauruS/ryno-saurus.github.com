@@ -28,16 +28,6 @@
 	else if ( quality_param == "720p" ){ quality = "hd720"; }
 	else if ( quality_param == "1080p" ){ quality = "hd1080"; }
 	else { quality = "default"; }
-
-	function stateChange( state )
-	{
-		document.title = state
-	}
-
-	function onYouTubePlayerReady()
-	{
-		ytplayer.addEventListener("onStateChange", "stateChange")
-	}
 </script>
 </head>
 <body leftmargin="0px" topmargin="0px" marginwidth="0px" marginheight="0px">
