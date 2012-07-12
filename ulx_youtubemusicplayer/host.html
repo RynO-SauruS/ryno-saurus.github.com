@@ -29,10 +29,10 @@
 	else if ( quality_param == "1080p" ){ quality = "hd1080"; }
 	else { quality = "default"; }
 
+	var volume_param = getURLParam( "volume" );
+
 	function onYouTubePlayerReady( playerId )
 	{
-		var volume_param = getURLParam( "volume" );
-
 		if ( volume_param != "" )
 		{
 			ytplayer.setVolume( volume_param )
@@ -41,7 +41,6 @@
 </script>
 </head>
 <body leftmargin="0px" topmargin="0px" marginwidth="0px" marginheight="0px">
-
 <div id="movie"></div>
 <script type="text/javascript">
 	var moviediv = document.getElementById( "movie" );
@@ -68,23 +67,5 @@
 		setVid( "aaaaaaaaaaa" ); //"Blank" and/or "invalid" video.
 	}
 </script>
-<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!<br/>
-TEST!
 </body>
 </html>
