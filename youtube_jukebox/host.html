@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>YouTube player</title>
+<script type="text/javascript">
+	var url_params = window.location.search;
+	function getURLParam( key )
+	{
+		var param = "";
+
+		var pattern = new RegExp( "[?&]" + key + "=" );
+		var find = url_params.search( pattern );
+		if ( find != -1 )
+		{
+			var param_start = find + 1 + key.length + 1;
+			var param_end = url_params.indexOf( "&", param_start ); //Stop just before the beginning of the next parameter.
+			if ( param_end == -1 ) { param_end = url_params.length; } //If there is no parameter next, then go to the end of the param string.
+
+			param = url_params.substring( param_start, param_end );
+		}
+		return param;
+	}
+
+	var quality_param = getURLParam( "quality" );
+
+	if ( quality_param == "240p" ){ quality = "small"; }
+	else if ( quality_param == "360p" ){ quality = "medium"; }
+	else if ( quality_param == "480p" ){ quality = "large"; }
+	else if ( quality_param == "720p" ){ quality = "hd720"; }
+	else if ( quality_param == "1080p" ){ quality = "hd1080"; }
+	else { quality = "default"; }
+
+	var volume_param = getURLParam( "volume" );
+
+	function onYouTubePlayerReady( playerId )
+	{
+		if ( volume_param != "" )
+		{
+			ytplayer.setVolume( volume_param )
+		}
+	}
+</script>
+</head>
+<body leftmargin="0px" topmargin="0px" marginwidth="0px" marginheight="0px">
+
+<div id="movie"></div>
+<script type="text/javascript">
+	var moviediv = document.getElementById( "movie" );
+
+	function setVid( video_id )
+	{
+		moviediv.innerHTML = 
+		'<embed src="http://www.youtube.com/v/'+video_id+'&vq='+quality+'&version=3&enablejsapi=1&rel=0&fs=0&modestbranding=1&showinfo=0&autohide=0&autoplay=1"\
+			type="application/x-shockwave-flash"\
+			id="ytplayer"\
+			width="100%" height="100%"\
+			allowscriptaccess="always"\
+			allowfullscreen="true"\
+		/>';
+	}
+
+	var video_id_param = getURLParam( "v" );
+	if ( video_id_param.length == 11 )
+	{
+		setVid( video_id_param );
+	}
+	else
+	{
+		setVid( "aaaaaaaaaaa" ); //"Blank" and/or "invalid" video.
+	}
+</script>
+</body>
+</html>
