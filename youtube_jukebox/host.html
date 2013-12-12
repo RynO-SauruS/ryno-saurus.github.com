@@ -20,15 +20,6 @@
 		return param;
 	}
 
-	var quality_param = getURLParam( "quality" );
-
-	if ( quality_param == "240p" ){ quality = "small"; }
-	else if ( quality_param == "360p" ){ quality = "medium"; }
-	else if ( quality_param == "480p" ){ quality = "large"; }
-	else if ( quality_param == "720p" ){ quality = "hd720"; }
-	else if ( quality_param == "1080p" ){ quality = "hd1080"; }
-	else { quality = "default"; }
-
 	var volume_param = getURLParam( "volume" );
 
 	function onYouTubePlayerReady( playerId )
@@ -46,10 +37,10 @@
 <script type="text/javascript">
 	var moviediv = document.getElementById( "movie" );
 
-	function setVid( video_id )
+	function setVid( video_id, quality )
 	{
 		moviediv.innerHTML = 
-		'<embed src="http://www.youtube.com/v/'+video_id+'&vq='+quality+'&version=3&enablejsapi=1&rel=0&fs=0&modestbranding=1&showinfo=0&autohide=0&autoplay=1"\
+		'<embed src="http://www.youtube.com/v/'+video_id+'?vq='+quality+'&version=3&enablejsapi=1&rel=0&fs=0&modestbranding=1&showinfo=0&autohide=0&autoplay=1"\
 			type="application/x-shockwave-flash"\
 			id="ytplayer"\
 			width="100%" height="100%"\
@@ -59,13 +50,24 @@
 	}
 
 	var video_id_param = getURLParam( "v" );
+
+	var quality_param = getURLParam( "quality" );
+	var quality = ""
+
+	if ( quality_param == "240p" ){ quality = "small"; }
+	else if ( quality_param == "360p" ){ quality = "medium"; }
+	else if ( quality_param == "480p" ){ quality = "large"; }
+	else if ( quality_param == "720p" ){ quality = "hd720"; }
+	else if ( quality_param == "1080p" ){ quality = "hd1080"; }
+	else { quality = "default"; }
+
 	if ( video_id_param.length == 11 )
 	{
-		setVid( video_id_param );
+		setVid( video_id_param, quality );
 	}
 	else
 	{
-		setVid( "aaaaaaaaaaa" ); //"Blank" and/or "invalid" video.
+		setVid( "aaaaaaaaaaa", "" ); //"Blank" and/or "invalid" video.
 	}
 </script>
 </body>
