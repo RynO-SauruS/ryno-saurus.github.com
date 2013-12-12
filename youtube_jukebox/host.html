@@ -2,22 +2,14 @@
 <head>
 <title>YouTube player</title>
 <script type="text/javascript">
-	var url_params = window.location.search;
 	function getURLParam( key )
 	{
-		var param = "";
+		var url_params = window.location.search;
 
-		var pattern = new RegExp( "[?&]" + key + "=" );
-		var find = url_params.search( pattern );
-		if ( find != -1 )
-		{
-			var param_start = find + 1 + key.length + 1;
-			var param_end = url_params.indexOf( "&", param_start ); //Stop just before the beginning of the next parameter.
-			if ( param_end == -1 ) { param_end = url_params.length; } //If there is no parameter next, then go to the end of the param string.
+		var pattern = new RegExp( "[?&]" + key + "=(.*?)(&|$)" );
+		var match = url_params.match( pattern );
 
-			param = url_params.substring( param_start, param_end );
-		}
-		return param;
+		return match && match[ 1 ] || "";
 	}
 
 	var volume_param = getURLParam( "volume" );
@@ -26,7 +18,7 @@
 	{
 		if ( volume_param != "" )
 		{
-			ytplayer.setVolume( volume_param )
+			ytplayer.setVolume( parseInt( volume_param ) )
 		}
 	}
 </script>
