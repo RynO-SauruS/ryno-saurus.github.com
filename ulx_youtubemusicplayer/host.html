@@ -54,7 +54,8 @@
 	var quality_param = getURLParam( "quality" );
 	var quality = ""
 
-	if ( quality_param == "240p" ){ quality = "small"; }
+	if ( quality_param == "144p" ){ quality = "tiny"; }
+	else if ( quality_param == "240p" ){ quality = "small"; }
 	else if ( quality_param == "360p" ){ quality = "medium"; }
 	else if ( quality_param == "480p" ){ quality = "large"; }
 	else if ( quality_param == "720p" ){ quality = "hd720"; }
